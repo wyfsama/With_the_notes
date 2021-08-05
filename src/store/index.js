@@ -79,7 +79,22 @@ export default new Vuex.Store({
         ]
       },
     bill: JSON.parse(localStorage.getItem('bill')) || [],
-    isDarkMode: JSON.parse(localStorage.getItem('darkmode')) || false
+    isDarkMode: JSON.parse(localStorage.getItem('darkmode')) || false,
+    theme: [
+      {
+        Light: '#3498db',
+        Dark: '#2980b9'
+      },
+      {
+        Light: '#e74c3c',
+        Dark: '#c0392b'
+      },
+      {
+        Light: '#f1c40f',
+        Dark: '#f39c12'
+      },
+    ],
+    defaultIndex: localStorage.getItem('defaultIndex') || 0
   },
   mutations: {
     deletePro(state, payload) {
@@ -91,7 +106,7 @@ export default new Vuex.Store({
         createAt: payload.createAt,
         type: payload.type,
         record: payload.record,
-        money: payload.type === 'pay' ? -1 * payload.money : payload.money,
+        money: payload.type === 'pay' ? -payload.money : payload.money,
         icon: payload.selected,
         name: state.projects[payload.type].find(item => item.icon === payload.selected).name
       })
@@ -111,6 +126,11 @@ export default new Vuex.Store({
     changeDarkMode(state, payload) {
       state.isDarkMode = payload
       localStorage.setItem('darkmode', state.isDarkMode)
+    },
+    changeIndex(state, payload) {
+      console.log(payload)
+      state.defaultIndex = payload
+      localStorage.setItem('defaultIndex', state.defaultIndex)
     }
   },
   actions: {

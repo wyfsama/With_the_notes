@@ -52,7 +52,7 @@
         <a-modal
           okText="确认"
           cancelText="取消"
-          :visible="visible"
+          :visible="visible1"
           :confirm-loading="confirmLoading"
           @ok="handleOk({ type, selected, record, money, createAt })"
           @cancel="handleCancel"
@@ -77,7 +77,7 @@ export default {
       record: '',
       money: '',
       createAt: this.moment().format('YYYY/MM/DD'),
-      visible: false,
+      visible1: false,
       confirmLoading: false,
     }
   },
@@ -109,25 +109,27 @@ export default {
   methods: {
     ...mapMutations(['addBill']),
     confirm(payload) {
-      if (payload.money) {
+      if (payload.money && typeof payload.money === 'number') {
         this.addBill(payload)
         this.record = ''
         this.money = ''
         this.$message.success('已提交')
+      } else if (!payload.money) {
+        this.visible1 = true
       } else {
-        this.visible = true
+        this.$message.error('含有非法字符，只能输入数字~');
       }
     },
     handleOk(payload) {
       this.confirmLoading = true
       this.money = 0
-      this.visible = false
+      this.visible1 = false
       this.confirmLoading = false
       this.addBill(payload)
       // console.log(e)
     },
     handleCancel() {
-      this.visible = false
+      this.visible1 = false
     },
     onChange(v) {
       this.createAt = v._d.toLocaleDateString()

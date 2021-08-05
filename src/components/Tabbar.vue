@@ -2,8 +2,8 @@
   <div>
     <van-tabbar
       v-model="active"
-      active-color="#3498db"
-      inactive-color="#2980b9"
+      :active-color="color.light"
+      :inactive-color="color.dark"
       route
     >
       <van-tabbar-item
@@ -32,11 +32,29 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
       active: 1,
+      color: {
+        light: '#3498db',
+        dark: '#2980b9',
+      },
     }
+  },
+  created() {
+    this.color.light = this.theme[this.defaultIndex].Light
+    this.color.dark = this.theme[this.defaultIndex].Dark
+  },
+  computed: {
+    ...mapState(['theme', 'defaultIndex']),
+  },
+  watch: {
+    defaultIndex(val) {
+      this.color.light = this.theme[val].Light
+      this.color.dark = this.theme[val].Dark
+    },
   },
   components: {},
 }

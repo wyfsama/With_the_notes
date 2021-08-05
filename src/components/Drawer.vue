@@ -9,32 +9,31 @@
       @close="onClose"
     >
       <div class="container">
-        <div class="mode item">
-          <div class="left">
-            <div class="icon1">
-              <icon-font type="icon-zhuti" />
+        <a-popover trigger="click" placement="rightTop">
+          <div class="mode item">
+            <div class="left">
+              <div class="icon1">
+                <icon-font type="icon-zhuti" />
+              </div>
+              <div class="name">主题切换</div>
             </div>
-            <div class="name">主题切换（暂未开放）</div>
-          </div>
-          <div class="right">
-            <div class="icon2">
-              <a-dropdown>
+            <div class="right">
+              <div class="icon2">
                 <div class="down">></div>
-                <a-menu slot="overlay">
-                  <a-menu-item>
-                    <a href="javascript:;">蓝（默认）</a>
-                  </a-menu-item>
-                  <a-menu-item>
-                    <a href="javascript:;">红</a>
-                  </a-menu-item>
-                  <a-menu-item>
-                    <a href="javascript:;">黄</a>
-                  </a-menu-item>
-                </a-menu>
-              </a-dropdown>
+              </div>
             </div>
           </div>
-        </div>
+          <template slot="content">
+            <p
+              v-for="(i, k) in colorList"
+              :key="k"
+              @click="changeIndex(k)"
+              :class="k === defaultIndex ? 'active' : ''"
+            >
+              {{ i }}
+            </p>
+          </template>
+        </a-popover>
         <div class="theme item">
           <div class="left">
             <div class="icon1">
@@ -90,8 +89,16 @@ export default {
       document.querySelector('body').className = 'dark'
     }
   },
+  created() {
+    document
+      .getElementsByTagName('body')[0]
+      .style.setProperty('--light', this.theme[this.defaultIndex].Light)
+    document
+      .getElementsByTagName('body')[0]
+      .style.setProperty('--dark', this.theme[this.defaultIndex].Dark)
+  },
   computed: {
-    ...mapState(['isDarkMode']),
+    ...mapState(['isDarkMode', 'theme', 'defaultIndex']),
     isDarkModeEnabled() {
       return this.isDarkMode
     },
@@ -100,6 +107,7 @@ export default {
     return {
       visible: false,
       placement: 'left',
+      colorList: ['蓝(默认)', '红', '黄'],
     }
   },
   watch: {
@@ -110,8 +118,15 @@ export default {
         document.body.removeAttribute('class', 'dark')
       }
     },
+    defaultIndex(val) {
+      document
+        .getElementsByTagName('body')[0]
+        .style.setProperty('--light', this.theme[val].Light)
+      document
+        .getElementsByTagName('body')[0]
+        .style.setProperty('--dark', this.theme[val].Dark)
+    },
   },
-  created() {},
   methods: {
     showDrawer() {
       this.visible = true
@@ -126,7 +141,7 @@ export default {
       localStorage.clear()
       window.location.reload()
     },
-    ...mapMutations(['changeDarkMode']),
+    ...mapMutations(['changeDarkMode', 'changeIndex']),
     onSwitched(isSwitched) {
       this.changeDarkMode(isSwitched)
       // console.log('dark mode is enabled :', isSwitched)
@@ -139,6 +154,9 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
+.active {
+  color: $theme-color-light;
+}
 .ant-drawer-content {
   .ant-drawer-body {
     .container {

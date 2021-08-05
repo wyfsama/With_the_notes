@@ -46,11 +46,11 @@ export default {
     flex: 1;
     padding: 0.1875rem 1.25rem;
     background: #ddd;
-    color: #3498db;
+    color: $theme-color-light;
     border-radius: 0.3125rem;
   }
   .active {
-    background: #3498db;
+    background: $theme-color-light;
     color: #ddd;
   }
 }

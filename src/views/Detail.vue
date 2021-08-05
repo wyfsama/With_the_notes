@@ -2,7 +2,7 @@ vue
 <template>
   <div>
     <Header>
-      <div class="header">明细</div>
+      <div class="title">明细</div>
     </Header>
     <div class="date-picker">
       <a-month-picker
@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
-.header {
+.title {
   font-weight: 700;
   font-size: 1rem;
 }

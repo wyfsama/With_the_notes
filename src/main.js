@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { Tabbar, TabbarItem } from 'vant'
-import { DatePicker, Input, Icon, message, Modal, Drawer, Dropdown, Menu, Switch } from 'ant-design-vue'
+import { DatePicker, Input, Icon, message, Modal, Drawer, Dropdown, Menu, Switch, Popover } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import '../src/assets/iconfont/iconfont.css'
 import '@/styles/base.scss'
@@ -22,6 +22,7 @@ Vue.use(Tabbar)
   .use(Dropdown)
   .use(Menu)
   .use(Switch)
+  .use(Popover)
 
 Vue.prototype.$message = message
 Vue.prototype.$echarts = echarts

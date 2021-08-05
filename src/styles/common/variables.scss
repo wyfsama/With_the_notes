@@ -1,2 +1,2 @@
-    $theme-color-light: #3498db;
-    $theme-color-dark: #2980b9;
+$theme-color-light: var(--light, #3498db);
+$theme-color-dark: var(--dark, #2980b9);

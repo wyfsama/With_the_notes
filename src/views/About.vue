@@ -8,7 +8,11 @@
       <div class="icon">
         <icon-font type="icon-notes" />
       </div>
-      <div class="version">当前版本 V1.0.0</div>
+      <div class="version">当前版本 V1.1.0</div>
+      <div class="update_note">
+        <h3>更新日志：</h3>
+        <div>1. 加入主题切换</div>
+      </div>
     </main>
     <footer>
       <p>感谢你使用随手记</p>
@@ -58,6 +62,15 @@ main {
   .version {
     color: #333;
     padding: 0.3125rem;
+  }
+  .update_note {
+    // flex: 1;
+    padding: 1rem;
+    align-self: start;
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
   }
 }
 footer {
