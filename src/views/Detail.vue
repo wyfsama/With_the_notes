@@ -17,7 +17,16 @@ vue
           {{
             bill
               .filter((item) => item.createAt === date)
-              .reduce((a, b) => a + b.money, 0)
+              .reduce((a, b) => a + +b.money, 0) > 0
+              ? '+' +
+                bill
+                  .filter((item) => item.createAt === date)
+                  .reduce((a, b) => a + +b.money, 0)
+                  .toFixed(2)
+              : bill
+                  .filter((item) => item.createAt === date)
+                  .reduce((a, b) => a + +b.money, 0)
+                  .toFixed(2)
           }}
         </div>
       </div>

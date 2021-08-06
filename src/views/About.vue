@@ -8,15 +8,23 @@
       <div class="icon">
         <icon-font type="icon-notes" />
       </div>
-      <div class="version">当前版本 V1.1.0</div>
+      <div class="version">当前版本 V1.1.1</div>
       <div class="update_note">
         <h3>更新日志：</h3>
         <div>1. 加入主题切换</div>
+        <div>2. 支持数值精确到分</div>
+        <div>3. 修复echarts的数值呈现问题</div>
       </div>
     </main>
     <footer>
       <p>感谢你使用随手记</p>
       <p>希望本项目能够帮助到你</p>
+      <p>
+        <strong>Blog: </strong
+        ><a style="color: #111" href="https://wyfsama.github.io"
+          >https://wyfsama.github.io</a
+        >
+      </p>
       <p class="eng">Good luck</p>
     </footer>
   </div>

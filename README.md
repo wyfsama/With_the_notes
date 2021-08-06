@@ -34,4 +34,5 @@ https://wyfsama.github.io/With_the_notes/dist/ 请使用手机预览
 - [x] 一键换肤
 - [x] 黑夜模式
 - [x] 数据可视化
+- [ ] Echarts 饼图主题颜色切换
 - [ ] 后端存储

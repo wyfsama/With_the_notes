@@ -106,7 +106,7 @@ export default new Vuex.Store({
         createAt: payload.createAt,
         type: payload.type,
         record: payload.record,
-        money: payload.type === 'pay' ? -payload.money : payload.money,
+        money: payload.type === 'pay' ? '-' + payload.money.toFixed(2) : '+' + payload.money.toFixed(2),
         icon: payload.selected,
         name: state.projects[payload.type].find(item => item.icon === payload.selected).name
       })

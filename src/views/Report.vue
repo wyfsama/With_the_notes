@@ -13,7 +13,7 @@
       <div class="count-wrap">
         <div class="count-detail">
           <div class="count-pay item">{{ pay }}</div>
-          <div class="count-income item">+{{ income }}</div>
+          <div class="count-income item">{{ income }}</div>
         </div>
         <div class="count-total">共计: {{ total }}</div>
       </div>
@@ -66,36 +66,44 @@ export default {
             createAt: item.createAt,
             icon: item.icon,
             name: item.name,
-            money: item.money,
+            money: +item.money,
             type: item.type,
           })
           map[item.name] = item
         } else {
           newbillList.find((i) => {
             return i.name === item.name
-          }).money += item.money
+          }).money += +item.money
         }
       })
       return newbillList
     },
     pay() {
       let sum = 0
-      this.bill.filter((i) => i.type === 'pay').forEach((i) => (sum += i.money))
-      return sum
+      this.bill
+        .filter(
+          (item) => new Date(item.createAt).getMonth() + 1 === this.showMonth
+        )
+        .filter((i) => i.type === 'pay')
+        .forEach((i) => (sum += +i.money))
+      return sum.toFixed(2)
     },
     income() {
       let sum = 0
       this.bill
+        .filter(
+          (item) => new Date(item.createAt).getMonth() + 1 === this.showMonth
+        )
         .filter((i) => i.type === 'income')
-        .forEach((i) => (sum += i.money))
-      return sum
+        .forEach((i) => (sum += +i.money))
+      return Number(sum) ? '+' + sum.toFixed(2) : sum.toFixed(2)
     },
     total() {
-      const res = this.pay + this.income
+      const res = +this.pay + +this.income
       if (res > 0) {
-        return '+' + res
+        return '+' + res.toFixed(2)
       } else {
-        return res
+        return res.toFixed(2)
       }
     },
   },

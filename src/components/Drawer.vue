@@ -107,7 +107,7 @@ export default {
     return {
       visible: false,
       placement: 'left',
-      colorList: ['蓝(默认)', '红', '黄'],
+      colorList: ['蓝', '红', '黄'],
     }
   },
   watch: {
